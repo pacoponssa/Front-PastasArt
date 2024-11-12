@@ -1,3 +1,5 @@
+Este proyecto se rtealizó con react para el segundo año de la carrera de desarrollo web.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
