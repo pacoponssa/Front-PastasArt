@@ -92,7 +92,7 @@ const FormularioProducto = () => {
       } else {
         await axios.put("/producto/" + id, producto);
       }
-      navigate("/admin/producto");
+      navigate("/admin/productoAd");
     } catch (error) {
       setError(error.message);
     }
@@ -250,6 +250,39 @@ const FormularioProducto = () => {
               </label>
             </div>
 
+            <div className="mb-4">
+              <label
+                className="block mb-2 text-sm font-bold text-gray-700"
+                htmlFor="nombre"
+              >
+                Caracteristicas:
+              </label>
+              <input
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="caracteristicas"
+                type="text"
+                name="caracteristicas"
+                value={producto.caracteristicas}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block mb-2 text-sm font-bold text-gray-700"
+                htmlFor="nombre"
+              >
+                especificaciones:
+              </label>
+              <input
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="especificaciones"
+                type="text"
+                name="especificaciones"
+                value={producto.especificaciones}
+                onChange={handleChange}
+              />
+            </div>
+
             <div className="flex justify-center bflex space-x-2">
               <button
                 className="px-4 py-2 bg-green-400 rounded hover:bg-green-500 text-white flex items-center justify-center"
@@ -260,7 +293,7 @@ const FormularioProducto = () => {
               <button
                 className="px-4 py-2 bg-orange-400 rounded hover:bg-orange-500 text-white flex items-center justify-center"
                 type="button"
-                onClick={() => navigate("/admin/producto")}
+                onClick={() => navigate("/admin/productoAd")}
               >
                 <span className="material-icons">close</span>
               </button>

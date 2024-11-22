@@ -10,7 +10,7 @@ function LayoutAdmin(){
           <Link to="/">Dashboard </Link>
         </div>
         <div className="hover:text-gray-700 mr-4">
-          <Link to="/admin/producto">Productos </Link>
+          <Link to="/admin/productoAd">Productos </Link>
         </div>
         <div className="hover:text-gray-700 mr-4">
           <Link to="/admin/producto/nuevo">Nuevo Producto </Link>
@@ -20,6 +20,15 @@ function LayoutAdmin(){
         </div>
         <div className="hover:text-gray-700 mr-4">
           <Link to="/admin/categorias/nuevo">Nueva Categoria </Link>
+        </div>
+        <div className="hover:text-gray-700 mr-4">
+          <Link to="/admin/cupon">cupon </Link>
+        </div>
+        <div className="hover:text-gray-700 mr-4">
+          <Link to="/admin/cupon/nuevo">Nuevo Cupon </Link>
+        </div>
+        <div className="hover:text-gray-700 mr-4">
+          <Link to="/admin/comentarios">Comentarios </Link>
         </div>
       </nav>
       <Outlet />

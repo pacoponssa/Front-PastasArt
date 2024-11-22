@@ -21,9 +21,12 @@ import ImagenesIndex from './admin/imagenes/index';
 import FormularioImagen from './admin/imagenes/formImagen.jsx';
 import CarritoIndex from './admin/carritos/index.jsx';
 import FormularioCarrito from './admin/carritos/formCarrito.jsx';
+import CuponIndex from './admin/cupones/index.jsx';
+import FormularioCupon from './admin/cupones/formCupon.jsx';
 // +++++++++
 import ProductDetail from './admin/productos/ProductDetail.jsx';
 // +++++++++
+import ComentariosIndex from './admin/comentarios/index.js';
 
 import './index.css';
 
@@ -48,13 +51,21 @@ const router = createBrowserRouter([
         path: "",
         element: <Dashboard />,
       },
+      // {
+      //   path: "producto",
+      //   element: <ProductosIndex />,
+      // },
       {
-        path: "producto",
+        path: "productoAd",
         element: <ProductosIndex />,
       },
       {
         path: "producto/:id",
         element: <FormularioProducto />,
+      },
+      {
+        path: "cupon",
+        element: <CuponIndex />,
       },
       {
         path: "categorias",
@@ -79,6 +90,14 @@ const router = createBrowserRouter([
       {
         path: "carrito/:id",
         element: <FormularioCarrito />,
+      },      
+      {
+        path: "cupon/:id",
+        element: <FormularioCupon />,
+      },
+      {
+        path: "comentarios",
+        element: <ComentariosIndex />,
       },
     ],
   },

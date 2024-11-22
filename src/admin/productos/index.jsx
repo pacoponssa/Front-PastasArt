@@ -16,12 +16,12 @@ function ProductosIndex() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("/producto")
+      .get("/productoAd")
       .then((respuesta) => {
         setLoading(false);
         if (respuesta.status === 200) {
           setData(respuesta.data.data);
-          console.log('**********', data);
+          console.log('*prod**', data);
         } else {
           console.log("error");
         }
@@ -47,7 +47,7 @@ function ProductosIndex() {
           console.log("Producto eliminado con éxito");
           // Actualiza la lista de productos
           axios
-            .get("/producto/")
+            .get("/productoAd/")
             .then((respuesta) => {
               setData(respuesta.data.data);
             })
@@ -108,7 +108,7 @@ function ProductosIndex() {
         <div className="ml-5">
           <button
             className="px-4 py-2 font-bold text-white bg-green-400 rounded hover:bg-green-500"
-            onClick={() => navigate("/admin/producto/nuevo")}
+            onClick={() => navigate("/admin/productoAd/nuevo")}
           >
             Crear Producto
           </button>
@@ -141,6 +141,12 @@ function ProductosIndex() {
               </th>
               <th className="px-4 py-2 border-2 border-gray-400 text-center">
                 Disponible
+              </th>
+              <th className="px-4 py-2 border-2 border-gray-400 text-center">
+              caracteristicas
+              </th>
+              <th className="px-4 py-2 border-2 border-gray-400 text-center">
+              especificaciones
               </th>
               <th className="px-4 py-2 border-2 border-gray-400 text-center">
                 Acciones
@@ -188,6 +194,12 @@ function ProductosIndex() {
                     ) : (
                       <div className="text-green-700 font-bold">NO</div>
                     )}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400 text-center">
+                    {producto.caracteristicas}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400 text-center">
+                    {producto.especificaciones}
                   </td>
                   <td className="px-4 py-2 text-center border border-gray-400">
                     {/* Botones de Editar y Eliminar */}

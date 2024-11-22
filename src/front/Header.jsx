@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import SearchBar from "./SearchBar";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+// import SearchBar from "./SearchBar";
+ import Logo from "../../src/Logo.png";
 
 const Header = ({ cantidad }) => {
   return (
@@ -20,8 +21,12 @@ const Header = ({ cantidad }) => {
             </li>
           </ul>
         </nav>
-        <a href="/" className="hover:text-orange-600">
-        <div className="w-full text-2xl text-center md:flex-grow md:w-auto font-bold mt-2 md:mt-0" class="transition ease-in-out delay-150 hover:skew-y-6 hover:scale-150 transform-gpu duration-300">PastasArt</div>
+        <a href="/" className="flex items-center">
+          <img
+            src={Logo}
+            alt="logo"
+            className="w-10 h-10 md:w-14 md:h-14 mr-2 transition ease-in-out delay-150 hover:skew-y-6 hover:scale-110 transform-gpu duration-300"
+          />
         </a>
         <div className="relative right-6 mt-2 md:mt-0">
           <a href="/cart" className="hover:text-orange-600">

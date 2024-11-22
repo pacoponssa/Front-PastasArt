@@ -15,6 +15,7 @@ import Carusel from "./front/Carusel";
 import Disponibles from "./front/Disponibles";
 import Select from "@mui/material/Select";
 import { Pagination } from "flowbite-react";
+import Cupon from "./front/Cupon";
 import "./Home.css";
 
 function Home() {
@@ -27,6 +28,7 @@ function Home() {
   const [categorias, setCategorias] = useState([]); // Estado para las categorías
   const [pagina, setPagina] = useState(1);
   const [cantidadItems, setCantidadItems] = useState(0);
+  const [descuentoGlobal, setDescuentoGlobal] = useState(0);
 
   // Lista identificando disponibles
   useEffect(() => {
@@ -46,7 +48,6 @@ function Home() {
       .then((respuesta) => {
         setLoading(false);
         if (respuesta.status === 200) {
-          console.log("respuesta correcta++++", respuesta);
           setData(respuesta.data.data.rows);
           setCantidadItems(respuesta.data.data.count);
         } else {
@@ -91,8 +92,8 @@ function Home() {
     setPriceRange(newPriceRange);
   };
 
-
   const onPageChange = (page) => setPagina(page);
+
 
   return (
     <>
@@ -101,21 +102,19 @@ function Home() {
         <Header />
       </div>
 
-      {/* SearchBar */}
-      <div>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-
       {/* Carusel */}
       <div>
         <Carusel />
       </div>
-
+           {/* SearchBar */}
+<div className="mb-4">
+  <SearchBar onSearch={handleSearch} className="w-full border p-2" />
+</div>
       {/* Layout */}
       <div className="flex flex-col md:flex-row justify-center m-6">
+        
         {/* Filtros */}
-        <div className="md:w-1/5 p-4">
-          {" "}
+        <div className="md:w-1/5 p-4">      
           {/* Ajuste del ancho al 20% */}
           <Box sx={{ minWidth: 120 }} className="mb-6">
             <FormControl fullWidth>
@@ -163,9 +162,16 @@ function Home() {
               categoria={selectedCategoria}
               disponibles={verDisponibles}
               priceRange={priceRange}
+              descuento = {descuentoGlobal}
             />
           )}
         </div>
+      </div>
+
+      
+      <div className="mb-6">
+        {/* Bloque de Cupones */}
+        <Cupon setDescuentoGlobal={setDescuentoGlobal} />
       </div>
 
       {/* {data && data.length > 0 && (

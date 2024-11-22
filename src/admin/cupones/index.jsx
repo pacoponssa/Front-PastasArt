@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-function CategoriaIndex() {
+function CuponIndex() {
   const navigate = useNavigate();
 
   const elementosPorPagina = 10;
@@ -15,8 +15,8 @@ function CategoriaIndex() {
 
   useEffect(() => {
     setLoading(true);
-    axios.get("/categorias/").then((respuesta) => {
-      console.log('**cat***',respuesta.data);  // Verifica la estructura aquí
+    axios.get("/cupon").then((respuesta) => {
+      console.log('*cupon*ff*',respuesta.data);  // Verifica la estructura aquí
       setLoading(false);
       if (respuesta.status === 200) {
         setData(respuesta.data.data);
@@ -30,38 +30,38 @@ function CategoriaIndex() {
   }, []);
 
   const handleEdit = (id) => {
-    navigate(`/admin/categorias/${id}`);
+    navigate(`/admin/cupon/${id}`);
   };
 
-  const eliminarCategoria = (id) => {
+  const eliminarCupon = (id) => {
     axios
-      .delete(`/categorias/${id}`)
+      .delete(`/cupon/${id}`)
       .then((respuesta) => {
         if (respuesta.status === 200) {
-          console.log("Categoria eliminada con éxito");
-          // Actualiza la lista de categorias
+          console.log("Cupon eliminada con éxito");
+          // Actualiza la lista de libros
           axios
-            .get("/categorias/")
+            .get("/cupon/")
             .then((respuesta) => {
               setData(respuesta.data.data);
             })
             .catch((error) => {
-              console.log("Error al actualizar la lista de categoria", error);
+              console.log("Error al actualizar la lista de cupones", error);
             });
         } else {
-          console.log("Error al eliminar la categoria", respuesta.status);
+          console.log("Error al eliminar el cupon", respuesta.status);
         }
       })
       .catch((error) => {
-        console.log("Error al eliminar la categoria", error);
+        console.log("Error al eliminar el cupon", error);
       });
   };
 
   const handleDelete = (id) => {
-    // Implementar lógica para eliminar una categoria
-    console.log(`Eliminar categoria con id ${id}`);
-    if (window.confirm(`¿Está seguro de eliminar la categoria con id ${id}?`)) {
-      eliminarCategoria(id);
+    // Implementar lógica para eliminar un cupon
+    console.log(`Eliminar cupon con id ${id}`);
+    if (window.confirm(`¿Está seguro de eliminar el cupon con id ${id}?`)) {
+      eliminarCupon(id);
     }
   };
 
@@ -86,7 +86,7 @@ function CategoriaIndex() {
         rel="stylesheet"
       ></link>
       <div className="p-6 text-2xl font-bold text-center text-gray bg-orange-300">
-        Gestión de Categoria
+        Gestión de Cupon
       </div>
       {loading ? "Cargando..." : ""}
       <div className="flex justify-center w-full mt-10">
@@ -102,9 +102,9 @@ function CategoriaIndex() {
         <div className="ml-5">
           <button
             className="px-4 py-2 font-bold text-white bg-green-400 rounded hover:bg-green-500"
-            onClick={() => navigate("/admin/categorias/nuevo")}
+            onClick={() => navigate("/admin/cupon/nuevo")}
           >
-            Crear Categoria
+            Crear Cupon
           </button>
         </div>
       </div>
@@ -116,7 +116,10 @@ function CategoriaIndex() {
                 ID
               </th>
               <th className="px-4 py-2 border-2 border-gray-400 text-center">
-                Descripción
+                Codigo
+              </th>
+              <th className="px-4 py-2 border-2 border-gray-400 text-center">
+                Descuento
               </th>
               <th className="px-4 py-2 border-2 border-gray-400 text-center">
                 Acciones
@@ -125,31 +128,33 @@ function CategoriaIndex() {
           </thead>
           <tbody>
             {filtrarElementosSegunPagina()
-              .filter((categoria) =>
-                categoria.descripcion
-                  .toLowerCase()
+              .filter((cupon) =>
+                cupon.codigo.toLowerCase()
                   .includes(filtro.toLowerCase())
               )
-              .map((categoria) => (
-                <tr key={categoria.idCategorias || categoria.idCategorias} className="bg-white border-b hover:bg-gray-100">
+              .map((cupon) => (
+                <tr key={cupon.idCupon || cupon.idCupon} className="bg-white border-b hover:bg-gray-100">
                   <td className="px-4 py-2 border border-gray-400 text-center">
-                    {categoria.idCategorias || categoria.idCategorias}
+                    {cupon.idCupon || cupon.idCupon}
                   </td>
                   <td className="px-4 py-2 border border-gray-400 text-center">
-                    {categoria.descripcion}
+                    {cupon.codigo}
+                  </td>
+                  <td className="px-4 py-2 border border-gray-400 text-center">
+                    {cupon.descuento}
                   </td>
                   <td className="px-4 py-2 border border-gray-400 text-center">
                     <div className="flex justify-center space-x-2">
                       <button
                         className="px-4 py-2 bg-green-400 rounded hover:bg-green-500 text-white flex items-center justify-center"
-                        onClick={() => handleEdit(categoria.idCategorias || categoria.idCategorias)}
+                        onClick={() => handleEdit(cupon.idCupon || cupon.idCupon)}
                       >
                         <span className="material-icons">edit</span>
                       </button>
               
                       <button
                         className="px-4 py-2 bg-red-500 rounded hover:bg-red-600 text-white flex items-center justify-center"
-                        onClick={() => handleDelete(categoria.idCategorias || categoria.idCategorias)}
+                        onClick={() => handleDelete(cupon.idCupon || cupon.idCupon)}
                       >
                         <span className="material-icons">delete</span>
                       </button>
@@ -162,15 +167,15 @@ function CategoriaIndex() {
       </div>
       <div>
         <div className="flex justify-center mt-5">
-          {filtrarElementosSegunPagina().filter((categoria) =>
-            categoria.descripcion.toLowerCase().includes(filtro.toLowerCase())
+          {filtrarElementosSegunPagina().filter((cupon) =>
+            cupon.codigo.toLowerCase().includes(filtro.toLowerCase())
           ).length === 0 ? (
             <tr>
               <td
                 colSpan={5}
                 className="px-4 py-2 text-center border border-gray-400"
               >
-                No se encontraron categorias que coincidan con su búsqueda.
+                No se encontraron cupones que coincidan con su búsqueda.
               </td>
             </tr>
           ) : (
@@ -196,4 +201,4 @@ function CategoriaIndex() {
   );
 }
 
-export default CategoriaIndex;
+export default CuponIndex;
